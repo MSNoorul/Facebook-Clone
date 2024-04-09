@@ -1,0 +1,111 @@
+.app.dark{
+    background-color: #eeeaea;
+    color: rgb(156,156,156);
+
+    .navbarContainer{
+        background-color: #383737;
+        color: rgb(231, 229, 229);
+        border-bottom: 0.5px solid rgb(156,156,156);
+        .results-list{
+            background-color: #393838;
+            box-shadow: 0px 0px 8px #434343;
+            .search-result:hover {
+                background-color: #585858;
+              }
+        }
+
+        .logo{
+            color: rgb(156,156,156);
+        }
+        .navbarLink{
+            color: rgb(156,156,156);
+        }
+        .searchInput{
+            color: #000000;
+        }
+        .menu-items{
+            background-color: #383737;
+            color: rgb(156,156,156);
+            a{ color: rgb(156,156,156);}
+        }
+    }
+    
+    .sidebar{
+        background-color: #111111;
+        color: rgb(156,156,156);
+        .menuLinkText{color: rgb(156,156,156);}
+
+        .sidebarButton{
+            background-color: rgb(156,156,156);;
+            color: #000000;
+        }
+       
+    }
+
+    .menuLink:hover{
+        background-color: rgba(98,97,97,0.3);
+    }
+
+    .sidebarFriendName{
+        color: rgb(156,156,156);
+    }
+
+    .feed{
+        background-color: #111111;
+        color: rgb(156,156,156);
+
+        .shareInput{
+            color: rgb(156,156,156);
+        }
+    }
+
+    .rightbar{
+        background-color: #111111;
+
+        .rightbarUsername{
+            color: rgb(156,156,156);
+        }
+    }
+
+    .editButton{
+        background-color: rgb(156,156,156);
+        color: #000000;
+    }
+    .profile{
+        background-color: #434343;
+    }
+
+    .editProfile{
+        background-color: #111111;
+        .bottom{
+            .right{
+                form{
+                    input{
+                        color: rgb(156,156,156);
+                    }
+                    .updateButton{
+                        background-color: rgb(156,156,156);
+                        color: #000000;
+                    }
+                }
+            }
+        }
+    }
+
+    .followers {
+        .friendList{
+            background-color: #393939;
+            .MuiListItemText-secondary{
+                span{color: indianred ;}
+            }
+        }
+    }
+    .following {
+        .friendList{
+            background-color: #393939; 
+            .MuiListItemText-secondary{
+                span{color: indianred ;}
+            }
+        }
+    }
+}

@@ -1,0 +1,239 @@
+.navbarContainer {
+  display: flex;
+  padding: 0px 20px;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  background-color: white;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+  user-select: none;
+
+  .navbarLeft {
+    margin: 8px 0px;
+    flex: 3;
+    display: flex;
+    align-items: center;
+
+    .header_input {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #eff2f5;
+      padding: 8px;
+      margin-left: 10px;
+      border-radius: 999px;
+      svg{width: 25px;}
+    }
+
+    input {
+      border: none;
+      background-color: transparent;
+      outline-width: 0;
+      margin-left: 10px;
+      width: auto;
+    }
+    img {
+      width: 40px;
+    }
+  }
+  .navbarCenter {
+    flex: 5;
+    align-self: stretch;
+    position: relative;
+    .links {
+      display: flex;
+      height: 100%;
+      padding: 0px 60px;
+      list-style: none;
+      li {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        cursor: pointer;
+        span {
+          // display: inline-block;
+          padding: 10px 40px;
+        }
+        span:hover {
+          background-color: #d2d2d245;
+          border-radius: 10px;
+        }
+
+        &.navlink-active {
+          border-bottom: 3px solid #5484ea;
+          svg {
+            fill: #5484ea;
+          }
+        }
+      }
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
+
+.navbarRight {
+  flex: 3;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: end;
+  color: white;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .icon {
+    height: 40px;
+    width: 40px;
+    background-color: #e4e6eb;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dadce0;
+    }
+
+    svg {
+      height: 20px;
+      width: 20px;
+      fill: black;
+    }
+  }
+
+  .navbarImg {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .menu-icon {
+    position: relative;
+    .menu-items {
+      width: 350px;
+      max-height: 300px;
+      top: 40px;
+      background-color: whitesmoke;
+      color: black;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      margin-top: 1rem;
+      overflow-y: auto;
+      .menu-items-wrapper {
+        .menuLink{
+            border-radius: 0px;
+            svg{fill: #5484ea;}
+            .menuLinkText {
+                display: inline;           
+            }
+        }
+      }
+    
+    }
+  }
+}
+.menu-items::-webkit-scrollbar{
+  width: 0px;
+}
+.menu-items:hover::-webkit-scrollbar-thumb{
+background-color: #a1a1a1c0;
+}
+
+.menu-items::-webkit-scrollbar-track{
+ display: none;
+}
+
+.menu-items::-webkit-scrollbar-thumb{
+background-color: transparent;
+ border-radius: 10px;
+}
+
+//Responsiveness
+
+@media only screen and (max-width: 992px) {
+  .navbarContainer {
+    .navbarLeft {
+      flex: 2;
+    }
+    .navbarCenter {
+      display: none;
+      flex: 5;
+      .searchBar {
+        width: 95%;
+
+        .searchInput {
+          width: 70%;
+        }
+      }
+    }
+
+    .navbarRight {
+      .navbarImg {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .navbarContainer {
+    .navbarLeft {
+      flex: 3;
+    }
+
+    .navbarRight {
+      .navbarLink {
+        display: none;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 576px) {
+  .navbarContainer {
+    justify-content: space-between;
+
+    .navbarLeft {
+      flex: 1;
+      .header_input {
+        .search-input {
+          width: 0;
+          margin-left: 0;
+        }
+        &.open {
+          .search-input {
+            width: auto;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+    .navbarCenter {
+      flex: 1;
+      display: none;
+    }
+    .navbarRight {
+      flex: 1;
+      &.hide {
+        display: none;
+      }
+    }
+  }
+}
