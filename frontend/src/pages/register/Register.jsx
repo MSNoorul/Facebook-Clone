@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import "./register.scss";
 import { useState } from "react";
 import Alert from '@mui/material/Alert';
@@ -9,6 +9,7 @@ import useFetch from "../../cutomHook/useFetch";
 const Register = () => {
   const [userData, setData] = useState({});
   const {loading ,error  ,fetchdata} = useFetch();
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Register = () => {
     }
     // server request
 
-    const callback = (data)=>{console.log(data);window.location.href = "/login"}
+    const callback = (data)=>{console.log(data);navigate("/login")}
 
     fetchdata("/user/register",options,callback)
 
