@@ -31,9 +31,7 @@ const server = http.createServer(async (req , res )=>{
     
     const parsedUrl = url.parse(req.url,true);
     const pathname = parsedUrl.pathname;
-    log("parsed url",parsedUrl)
-
-    
+  
     const regexuser = /^\/user\/?\w*/;
     const regexpost = /^\/post\/?\w*/;
 
