@@ -1,5 +1,6 @@
 import { DriveFolderUploadOutlined } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./editProfile.scss";
@@ -13,6 +14,7 @@ const EditProfile = () => {
   const { currentUser, setCurrentUser } = useUsercontext();
   const [userData, setData] = useState({});
   const { loading, error, fetchdata } = useFetch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = "/user/" + currentUser._id ;
@@ -31,7 +33,7 @@ const EditProfile = () => {
       },
       body: JSON.stringify(userData),
     };
-    const callback = (result) => {if (result.acknowledged) window.location.href = "/profile/userId";}
+    const callback = (result) => {if (result.acknowledged){ navigate( "/profile/userId")}}
 
     fetchdata(url,options,callback);
   };
