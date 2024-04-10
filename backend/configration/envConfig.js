@@ -1,10 +1,15 @@
 
+const { log } = require('console');
 const fs = require('fs');
 const path = require('path');
 
 function envConfig(){
 // Read the .env file
-const envPath = path.resolve(__dirname, '../../.env');
+const __dirname = path.resolve();
+const envPath = path.join(__dirname, '../.env');
+
+if(!fs.existsSync(envPath)) return
+
 const envFile = fs.readFileSync(envPath, 'utf8');
 
 // Parse the .env file and set environment variables

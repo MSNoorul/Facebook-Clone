@@ -4,16 +4,10 @@ import { useState,useEffect, useRef } from "react";
 function useFetch() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const baseUrl = useRef('');
-
-  useEffect(() => {
-     baseUrl.current = import.meta.env.DEV?import.meta.env.VITE_API_URL:'';  
-  }, []);
- 
 
   const fetchdata = async (urlStr,option = {},callback) => {
  
-    const url = baseUrl.current+ urlStr;
+    const url = import.meta.env.VITE_API_URL + urlStr;
 
     // if user pass second argument as a callback 
     if(typeof(option) == "function"){
