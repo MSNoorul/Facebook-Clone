@@ -2,7 +2,7 @@ const User = require("../../modal/user");
 const ResponseJson = require("../../utils/handleResponse");
 
 // http.createServer((req ,res)=>{
-async function handleGet( res ,path) {
+async function handleGet( req ,res ,path) {
 
   const regex = /^\/user\/(\w+)$/;
   const Id = regex.exec(path)[1];

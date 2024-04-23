@@ -2,7 +2,7 @@ const Post = require("../../modal/post");
 const ResponseJson = require("../../utils/handleResponse");
 
 // http.createServer((req ,res)=>{
-async function getPost( res ,path) {
+async function getPost(req, res ,path) {
 
   const regex = /^\/post\/(\w+)$/;
   const Id = regex.exec(path)[1];

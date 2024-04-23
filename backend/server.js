@@ -5,13 +5,10 @@ const bodyParser = require('./configration/bodyParser');
 const { log } = require('console');
 const mongoose = require('mongoose');
 const url  = require('url');
-const path = require('path');
-const fs = require('fs');
 const helmet = require('./middleware/helmet');
 const handleUserRoutes = require('./router/userRouter');
 const handlePostRoutes = require('./router/postRouter');
 const cors = require('./middleware/cors');
-const serveStaticFiles = require('./utils/serveStatic');
 
 envCofig();
 mongooseConfig();
@@ -21,26 +18,29 @@ const PORT= process.env.PORT || 3000;
 
 
 const server = http.createServer(async (req , res )=>{
-  // corsmiddleware(req ,res , async ()=>{
+
     cors(res ,req);
     if(req.method == 'OPTIONS') return;
     
     helmet(res);  // Set security headers manually
     
     req.body = await bodyParser(req);
-    
-    const parsedUrl = url.parse(req.url,true);
-    const pathname = parsedUrl.pathname;
+    const pathname = req.url;
+  
   
     const regexuser = /^\/user\/?\w*/;
     const regexpost = /^\/post\/?\w*/;
 
     if (regexuser.test(pathname)) {
-        handleUserRoutes(req, res ,pathname);
+        handleUserRoutes(req, res );
       } 
     else if (regexpost.test(pathname)) {
-        handlePostRoutes(req, res ,pathname);
+        handlePostRoutes(req, res );
       } 
+      else {
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.end("Route not found");
+      }
     // else {
     //   const __dirname = path.resolve();
     //   const filePath = path.join(__dirname,'frontend',"dist" ,pathname);

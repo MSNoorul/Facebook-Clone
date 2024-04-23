@@ -9,46 +9,29 @@ const handleSearch = require("../controller/userController/handleSearch");
 const handleLogout = require("../controller/userController/handleLogout");
 const findFollowers = require("../controller/userController/findFollowers");
 const findFollowing = require("../controller/userController/findFollowing");
+const handleDelete = require("../controller/postController/deletePost");
 
-function handleUserRoutes(req, res, path) {
-  
-  if (/^\/user\/search\/(\w+)$/.test(path) && req.method === "POST") {
-    handleSearch(req,res, path)
-  } 
-  else if (/^\/user\/(\w+)$/.test(path) && req.method === "GET") {
-    handleGet(res ,path);
-  } 
-  else if (path === "/user/register" && req.method === "POST") {
-    handleRegister(req, res);
-  } 
-  else if (path === "/user/login" && req.method === "POST") {
-    handleLogin(req, res);
-  } 
-  else if (path === "/user/logout" && req.method === "POST") {
-    handleLogout(req, res);
-  } 
-  else if (/^\/user\/update\/(\w+)$/.test(path) && req.method === "PUT") {
-    handleUpdate(req, res, path);
-  }
-   else if (/^\/user\/delete\/(\w+)$/.test(path) && req.method === "DELETE") {
-    handleDelete(req, res, path);
-  }
-   else if (/^\/user\/follow\/(\w+)$/.test(path) && req.method === "PUT") {
-    handleFollow(req, res, path);
-  }
-   else if (/^\/user\/unfollow\/(\w+)$/.test(path) && req.method === "PUT") {
-    handleUnFollow(req, res, path);
-  }
-   else if (/^\/user\/followers\/(\w+)$/.test(path) && req.method === "GET") {
-    findFollowers(req, res, path);
-  }
-   else if (/^\/user\/following\/(\w+)$/.test(path) && req.method === "GET") {
-    findFollowing(req, res, path);
-  }
-   else {
-    res.writeHead(404, { "Content-Type": "text/plain" });
-    res.end("Route not found");
-  }
+const Router = require('../utils/router');
+
+function handleUserRoutes(req, res) {
+
+  const route = new Router(req,res);
+
+  route.get(/^\/user\/(\w+)$/,handleGet)
+  route.get(/^\/user\/followers\/(\w+)$/,findFollowers)
+  route.get(/^\/user\/following\/(\w+)$/,findFollowing)
+
+  route.post(/^\/user\/search\/(\w+)$/,handleSearch)
+  route.post('/user/register',handleRegister)
+  route.post('/user/login',handleLogin)
+  route.post('/user/logout',handleLogout)
+
+  route.update(/^\/user\/update\/(\w+)$/,handleUpdate)
+  route.update(/^\/user\/follow\/(\w+)$/,handleFollow)
+  route.update(/^\/user\/unfollow\/(\w+)$/,handleUnFollow)
+
+  route.delete(/^\/user\/delete\/(\w+)$/,handleDelete)
+
 }
 
 module.exports = handleUserRoutes;
