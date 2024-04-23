@@ -4,7 +4,7 @@ function verifyToken(req, res) {
   try {
     const athuheader = req.headers['authorization'] 
     if(athuheader){
-       const payload =  NWT.verifyToken(authorization,process.env.ACCESS_TOKEN_SECRET);
+       const payload =  NWT.verifyToken(athuheader,process.env.ACCESS_TOKEN_SECRET);
        req.user = payload.username;
        next();
 

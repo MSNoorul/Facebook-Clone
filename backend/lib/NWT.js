@@ -47,9 +47,6 @@ class NWT {
     return decodedPayload;
   }
 
-
-
-
   
   base64UrlEncode(str) {
     const base64 = Buffer.from(str).toString('base64');
