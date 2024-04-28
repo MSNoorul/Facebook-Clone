@@ -1,44 +1,62 @@
-# GoLang REST API With Kubernetes Helm Chart EXAMPLE Project
+# Facbook Clone
 
-## A fully functional EXAMPLE project written in Go showing how to create a REST API and deploy to Kubernetes!
+This project is a simple clone of the popular social media platform Facebook, created as a learning exercise. It uses React.js for the frontend, Node.js for the backend, MongoDB as the database, and Cloudinary for image storage.
 
-This project is an example that was built along with a Youtube Series showing how to create a custom REST API in Golang. Every part of this project is sample code which shows how to do the following:
+## How to Run
 
-- Create a custom web server with Golang using HTTPRouter
-- Create a simple REST API that serves Youtube stats (as an example use case)
-- Automatically containerize and push a Docker container to Docker hub using Github Actions
-- Create a Kubernetes Helm chart for deploying your API to Kubernetes
-- Push your Helm chart to a Helm Chart repo using Github Actions and Github Pages (coming soon)
-- How to write a good README (you are reading it now!)
+1. **Clone the Repository**: 
+   ```bash
+   git clone <repository-url>
+   cd Facbook-clone
 
-## Watch the full series!
+2. **Install Backend Dependencies**: 
+   ```bash
+   cd backend
+   npm install
 
-<a href="https://www.youtube.com/playlist?list=PLSvCAHoiHC_rqKbcu1ummWVpLTDBNZHH7" target="_blank">
-<img src="http://img.youtube.com/vi/SiGxu2N9ndU/mqdefault.jpg" alt="Watch the series" width="240" height="180" border="10" />
-</a>
+3. **Install Frontend Dependencies**: 
+   ```bash
+   cd ../frontend
+   npm install
 
-## How to install this example Golang project on Kubernetes
 
-The easiest way to see how this works is to watch the series, but here's the short version.
+4. **Run Frontend**: 
+   ```bash
+   npm run dev
 
-1. clone this project
-2. Set up a local kubernetes cluster - https://askcloudarchitech.com/posts/tutorials/local-kubernetes-startup-script/
-3. Install helm - `brew install helm`
-4. Setup your keys - see the video here - https://www.youtube.com/watch?v=k0L_yR30PqI&list=PLSvCAHoiHC_rqKbcu1ummWVpLTDBNZHH7&index=5
-5. Install with Helm
+5. **Run Backend**: 
+   ```bash
+   cd ../backend
+   node server
 
-## How to tweak this project for your own uses
+6. **Set Environment Variables**:
+- Create a `.env` file in the root folder of the project.
+- Add the following environment variables:
+  - `DATABASE_URI`: MongoDB connection URI.
+  - `ACCESS_TOKEN_SECRET`: Secret key for JWT access tokens.
+  - `REFRESH_TOKEN_SECRET`: Secret key for JWT refresh tokens.
+  - Cloudinary details:
+    - `CLOUD_NAME`
+    - `API_KEY`
+    - `API_SECRET`
+- Example `.env` file:
+  ```
+  DATABASE_URI=mongodb://localhost:27017/facbook-clone
+  ACCESS_TOKEN_SECRET=myAccessTokenSecret
+  REFRESH_TOKEN_SECRET=myRefreshTokenSecret
+  CLOUD_NAME=myCloudName
+  API_KEY=myApiKey
+  API_SECRET=myApiSecret
+  ```
 
-Since this is an example project, I'd encourage you to clone and rename this project to use for your own puposes. It's a good starter boilerplate
+7. **Set Environment Mode**:
+- In the `.env` file in the root folder, set `NODE_ENV` to `development` or `production`.
+- Example `.env` file:
+  ```
+  NODE_ENV=development
+  ```
 
-## Find a bug?
+8. **Access the Application**:
+- Open your browser and navigate to `http://localhost:3000`.
 
-If you found an issue or would like to submit an improvement to this project, please submit an issue using the issues tab above. If you would like to submit a PR with a fix, reference the issue you created!
-
-## Known issues (Work in progress)
-
-This tutorial is till ongoing. The automation of the helm chart repo has not been completed yet. This is coming soon!
-
-## Like this project?
-
-If you are feeling generous, buy me a coffee! - https://www.buymeacoffee.com/askcloudtech
+Now you should be able to access the Facbook clone in your browser. Enjoy exploring and learning from the project!
