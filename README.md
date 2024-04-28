@@ -31,6 +31,7 @@ This project is a simple clone of the popular social media platform Facebook, cr
    node server
 
 6. **Set Environment Variables**:
+
 **For backend**
 - Create a `.env` file in the root folder of the project.
 - Add the following environment variables:
