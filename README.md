@@ -2,6 +2,8 @@
 
 This project is a simple clone of the popular social media platform Facebook, created as a learning exercise. It uses React.js for the frontend, Node.js for the backend, MongoDB as the database, and Cloudinary for image storage.
 
+- To see the project [Live link](https://face-book-social.netlify.app).
+
 ## How to Run
 
 1. **Clone the Repository**: 
@@ -11,12 +13,11 @@ This project is a simple clone of the popular social media platform Facebook, cr
 
 2. **Install Backend Dependencies**: 
    ```bash
-   cd backend
    npm install
 
 3. **Install Frontend Dependencies**: 
    ```bash
-   cd ../frontend
+   cd frontend
    npm install
 
 
@@ -26,10 +27,11 @@ This project is a simple clone of the popular social media platform Facebook, cr
 
 5. **Run Backend**: 
    ```bash
-   cd ../backend
+   cd backend
    node server
 
 6. **Set Environment Variables**:
+**For backend**
 - Create a `.env` file in the root folder of the project.
 - Add the following environment variables:
   - `DATABASE_URI`: MongoDB connection URI.
@@ -39,6 +41,7 @@ This project is a simple clone of the popular social media platform Facebook, cr
     - `CLOUD_NAME`
     - `API_KEY`
     - `API_SECRET`
+    - `NODE_ENV`
 - Example `.env` file:
   ```
   DATABASE_URI=mongodb://localhost:27017/facbook-clone
@@ -47,7 +50,11 @@ This project is a simple clone of the popular social media platform Facebook, cr
   CLOUD_NAME=myCloudName
   API_KEY=myApiKey
   API_SECRET=myApiSecret
+  NODE_ENV=development
   ```
+  **For Frontend**
+  - Create a `.env` file in the frontend folder of the project.
+  - Add  `VITE_API_URL = http://localhost:3000` 
 
 7. **Set Environment Mode**:
 - In the `.env` file in the root folder, set `NODE_ENV` to `development` or `production`.
@@ -57,6 +64,6 @@ This project is a simple clone of the popular social media platform Facebook, cr
   ```
 
 8. **Access the Application**:
-- Open your browser and navigate to `http://localhost:3000`.
+- To see the project [Live link](https://face-book-social.netlify.app).
 
 Now you should be able to access the Facbook clone in your browser. Enjoy exploring and learning from the project!
