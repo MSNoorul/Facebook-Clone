@@ -42,6 +42,7 @@ This project is a simple clone of the popular social media platform Facebook, cr
     - `CLOUD_NAME`
     - `API_KEY`
     - `API_SECRET`
+  - Environment Mode:
     - `NODE_ENV`
 - Example `.env` file:
   ```
