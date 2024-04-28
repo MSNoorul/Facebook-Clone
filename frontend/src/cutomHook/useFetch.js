@@ -1,9 +1,11 @@
-import { useState,useEffect, useRef } from "react";
-
+import { useState } from "react";
+import { useUsercontext } from "../context/userContext";
 
 function useFetch() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const {setCurrentUser} = useUsercontext();
 
   const fetchdata = async (urlStr,option = {},callback) => {
  
@@ -24,8 +26,26 @@ function useFetch() {
         const data = await res.json()
         callback(data)
       }
+      // middlware for refresh token
+      // else if(res.status == 403){
+      //   const acctoken = await refreshToken() // middleware to refresh the token
+      //   console.log(acctoken);
+      //   if(acctoken){
+      //     // fetchdata(urlStr,option = {},callback)
+      //   }
+      //   else{
+      //     //login limit expires
+      //   }
+      // }
       else {
         const err = await res.json();
+        if(err.message == 'Token expired') {
+          err.message = 'Token Expired Login Again';
+          setTimeout(() => {
+            sessionStorage.removeItem('currentUser')  
+            setCurrentUser(null)     
+          }, 5000);
+        }
         throw new Error(`${res.status} ${err.message}`)
       }
      }

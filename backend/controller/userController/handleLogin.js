@@ -2,6 +2,7 @@ const crypto = require("node:crypto");
 const User = require("../../modal/user");
 const NWT = require('../../lib/NWT');
 const ResponseJson = require("../../utils/handleResponse");
+const { log } = require("node:console");
 async function handleLogin(req, res) {
 
   const { username,  password } = req.body;
@@ -26,12 +27,12 @@ async function handleLogin(req, res) {
 
     if (hashpwd === storedpwd) {
 
-      const accesstoken = NWT.createToken({"username":username},process.env.ACCESS_TOKEN_SECRET,300);
-      const refreshtoken = NWT.createToken({"username":username},process.env.REFRESH_TOKEN_SECRET,86400);
+      const accesstoken = NWT.createToken({"username":username},process.env.ACCESS_TOKEN_SECRET,1000 * 60 * 60 * 24 );
+      const refreshtoken = NWT.createToken({"username":username},process.env.REFRESH_TOKEN_SECRET, 1000 *60 *60 * 24 );
      
       await  User.updateOne({ username: username }, { $set: {refreshtoken : refreshtoken } });
 
-      res.setHeader('Set-Cookie', `jwt=${refreshtoken}; HttpOnly; Max-Age=86400`);
+      res.setHeader('Set-Cookie', `jwt=${refreshtoken}; HttpOnly; Secure; SameSite=None; Max-Age=86400`);
 
       ResponseJson(res,200,{...finduser._doc,accesstoken,refreshtoken:""})
     } else {

@@ -15,27 +15,30 @@ import { Link } from "react-router-dom";
 import { useUsercontext } from "../../context/userContext";
 import useFetch from "../../cutomHook/useFetch";
 
-const Post = ({ post ,render}) => {
+const Post = ({ post, render }) => {
   const [user, setUser] = useState({});
   const [like, setlike] = useState(post.likes.length || 0);
   const { currentUser } = useUsercontext();
-  const {fetchdata} = useFetch();
+  const { fetchdata } = useFetch();
   const [deleteMenu, setDeleteMenu] = useState(false);
 
   useEffect(() => {
     const url = `/user/${post.userId}`;
-    fetchdata(url,setUser)
+    const option = {  headers: {
+      "Authorization": 'Bearer ' + currentUser.accesstoken,
+    },}
+    fetchdata(url, option ,setUser);
   }, []);
 
   const handleLikes = (name) => {
-    const url =  `/post/${name}/${post._id}`;
+    const url = `/post/${name}/${post._id}`;
     const option = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ id: currentUser._id }),
-    }
+    };
     const callback = (result) => {
       if (result.modifiedCount > 0 && name == "like") {
         setlike((n) => n + 1);
@@ -43,11 +46,11 @@ const Post = ({ post ,render}) => {
         setlike((n) => {
           if (n - 1 < 0) return 0;
           else return n - 1;
-        })
+        });
       }
-    }
+    };
 
-    fetchdata(url,option,callback)
+    fetchdata(url, option, callback);
   };
 
   const handleDeleteMenu = () => {
@@ -55,12 +58,19 @@ const Post = ({ post ,render}) => {
   };
 
   const handleDelete = () => {
+    const url = `/post/delete/${post._id}`;
+    const option = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: currentUser._id }),
+    };
+    const callback = (data) => {
+      if (data.deletedCount > 0) render();
+    };
 
-    const url =  `/post/delete/${post._id}`;
-    const option = {method:'DELETE'}
-    const callback = (data) => {if(data.deletedCount >0) render()}
-
-    fetchdata(url,option,callback) 
+    fetchdata(url, option, callback);
   };
 
   return (

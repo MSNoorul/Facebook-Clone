@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./online.scss";
 import useFetch from "../../cutomHook/useFetch";
+import { useUsercontext } from "../../context/userContext";
 
 const Online = ({userId}) => {
   const [user , setUser] = useState({});
+  const {currentUser} = useUsercontext();
   const {fetchdata} = useFetch();
 
   useEffect(() => {
     const url =  `/user/${userId}`;
-    fetchdata(url , setUser)
+    const option = {  headers: {
+      "Authorization": 'Bearer ' + currentUser.accesstoken,
+    },}
+    fetchdata(url ,option, setUser)
   }, []);
   
   return (

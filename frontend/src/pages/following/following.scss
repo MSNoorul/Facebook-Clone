@@ -1,8 +1,12 @@
 .following{
+    height: 100vh;
+    overflow: hidden;
     .followingWrapper{
         display: flex;
         .friendList{
             flex: 10;
+            height: calc(100vh - 56px);
+            overflow-y: auto;
         }
         .sidebar {   
             .sidebarWrapper {

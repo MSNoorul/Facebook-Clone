@@ -21,7 +21,7 @@ async function handleFollow(req,res ,path) {
      const result2 =  await requestuser.updateOne({$push:{following:Id}});
      const updatedUser = await User.findOne({ _id: requestuserId });
 
-     ResponseJson(res,200,{result:result2,currentUser:updatedUser })
+     ResponseJson(res,200,{result:result2,currentUser:{...updatedUser._doc,refreshtoken:""} })
    
     }  else {
       ResponseJson(res,409,{message:  "Altready Followed" + user.username})

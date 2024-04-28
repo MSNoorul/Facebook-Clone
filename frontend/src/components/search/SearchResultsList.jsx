@@ -15,7 +15,7 @@ export const SearchResultsList = ({ result }) => {
       },
       body: JSON.stringify({ id: currentUser._id }),
     }
-    const callback = (data) => {if (data.result.modifiedCount > 0) {setCurrentUser(data.currentUser)} }
+    const callback = (data) => {if (data.result.modifiedCount > 0) {setCurrentUser((pre)=> ({...data.currentUser, accesstoken :pre.accesstoken}))} }
 
     if (e.target.innerText == "Follow") {
       const url = `/user/follow/${id}`;

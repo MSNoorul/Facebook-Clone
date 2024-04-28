@@ -20,7 +20,12 @@ const Feed = () => {
 
   useEffect(() => {
     const url = `/post/timeline/${userId}`;
-    fetchdata(url,setPost)
+    const option  = {
+      headers: {
+        "Authorization": 'Bearer ' + currentUser.accesstoken,
+      },
+    }
+    fetchdata(url,option,setPost)
   }, [render]);
 
   return (

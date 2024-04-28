@@ -13,7 +13,12 @@ function Following() {
 
     useEffect(()=>{
         const url = "/user/following/"+ currentUser._id;
-        fetchdata(url,setFollowing);
+        const option = {
+            headers: {
+                "Authorization": 'Bearer ' + currentUser.accesstoken,
+              },
+        }
+        fetchdata(url,option,setFollowing);
     },[])
     return ( 
        <div className="following">

@@ -6,17 +6,27 @@ import Feed from "./../../components/feed/Feed";
 import Rightbar from "./../../components/rightbar/Rightbar";
 import { useUsercontext } from "../../context/userContext";
 import useFetch from "../../cutomHook/useFetch";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const Profile = () => {
  const { currentUser ,setCurrentUser} = useUsercontext();
- const {fetchdata} = useFetch();
+ const {fetchdata , error} = useFetch();
  useEffect(() => {
   console.log(currentUser);
  }, []);
 
  useEffect(() => {
   const url = "/user/" + currentUser._id ;
-  fetchdata(url,setCurrentUser)
+  const option = {  headers: {
+    "Authorization": 'Bearer ' + currentUser.accesstoken,
+  },}
+  const callback = (data) => {
+    setCurrentUser((pre) => ({
+      ...data,
+      accesstoken: pre.accesstoken,
+    }))} // to preserve the accesstoken
+  fetchdata(url,option,callback)
  }, []);
   
   return (
@@ -27,9 +37,9 @@ const Profile = () => {
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-              <img src={currentUser.coverPicture.url || '/assets/profilecover.jpg'} alt="" className="profileCoverImg" />
+              <img src={currentUser.coverPicture?.url || '/assets/profilecover.jpg'} alt="" className="profileCoverImg" />
               <img
-                src={currentUser.profilePicture.url || '/assets/DefaultProfile.jpg'}
+                src={currentUser.profilePicture?.url || '/assets/DefaultProfile.jpg'}
                 alt=""
                 className="profileUserImg"
               />
@@ -45,6 +55,16 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      {error && (
+        <Snackbar
+          open={!!error}
+          autoHideDuration={3300} // Duration in milliseconds (adjust as needed)
+          onClose={() => error}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }} // Positioning at the top
+        >
+          <Alert severity="error">{error}</Alert>
+        </Snackbar>
+      )}
     </div>
   );
 };

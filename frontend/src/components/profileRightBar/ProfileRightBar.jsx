@@ -42,7 +42,7 @@ const ProfileRightBar = () => {
       </div>
 
       <h4 className="profileRightBarTitle">Following</h4>
-      {currentUser.following.map((u) => (
+      {currentUser.following?.map((u) => (
           <Online key={u} userId={u} />
         ))}
     </div>

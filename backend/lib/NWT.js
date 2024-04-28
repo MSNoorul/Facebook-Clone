@@ -1,3 +1,4 @@
+const { log } = require('console');
 const crypto = require('crypto');
 
 
@@ -10,12 +11,12 @@ class NWT {
   static createToken(payload, secretKey,expiresIn) {
  
     const header = {
-      alg: 'HS256',
+      alg: 'SH256',
       typ: 'NWT'
     };
 
-    const expirationTime = Date.now() + expiresIn * 1000; // Convert expiresIn to milliseconds and calculate expiration time
-    payload.exp = Math.floor(expirationTime / 1000); // Add expiration time to the payload
+    const expirationTime = Date.now() + expiresIn; 
+    payload.exp = expirationTime; // Add expiration time to the payload
 
     const encodedHeader =  NWT.prototype.base64UrlEncode(JSON.stringify(header));
     const encodedPayload = NWT.prototype.base64UrlEncode(JSON.stringify(payload));
@@ -35,13 +36,13 @@ class NWT {
     const expectedSignature = NWT.prototype.signData(signatureInput,secretKey);
 
     if (signature !== expectedSignature) {
-      throw new Error('Invalid signature');
+      return false
     }
 
     const decodedPayload = JSON.parse(NWT.prototype.base64UrlDecode(encodedPayload));
 
-    if (decodedPayload.exp && decodedPayload.exp < Math.floor(Date.now() / 1000)) {
-      throw new Error('Token has expired');
+    if (decodedPayload.exp && decodedPayload.exp < Date.now() ) {
+      return false
     }
 
     return decodedPayload;
@@ -62,10 +63,8 @@ class NWT {
   }
 
   signData(data ,secretKey) {
-    const hmac = crypto.createHmac('sha256', secretKey);
-    hmac.update(data);
-    const signature = hmac.digest('base64');
-    return this.base64UrlEncode(signature);
+    return  crypto.createHmac('sha256', secretKey)
+    .update(data).digest('base64url')
   }
 
 }

@@ -1,0 +1,10 @@
+Set-Cookie: name=value; [Expires=date;] [Max-Age=seconds;] [Domain=domain;] [Path=path;] [Secure;] [HttpOnly;] [SameSite=Strict|Lax|None]
+Set-Cookie: sessionId=123456; Expires=Wed, 09 Jun 2021 10:18:14 GMT; Path=/; Secure; HttpOnly; SameSite=Strict
+name=value: The name and value of the cookie.
+Expires: The expiry date of the cookie. If not set, the cookie is deleted when the browser is closed.
+Max-Age: The maximum age of the cookie in seconds. Overrides Expires if both are set.
+Domain: Specifies which hosts are allowed to receive the cookie. If not specified, defaults to the host of the current document URL.
+Path: Specifies the URL path(s) for which the cookie is valid. If not specified, defaults to the path of the current document URL.
+Secure: Indicates that the cookie should only be transmitted over a secure (HTTPS) connection.
+HttpOnly: Prevents client-side scripts from accessing the cookie.
+SameSite: Specifies whether the cookie should be sent with cross-site requests.

@@ -11,26 +11,30 @@ const findFollowers = require("../controller/userController/findFollowers");
 const findFollowing = require("../controller/userController/findFollowing");
 const handleDelete = require("../controller/postController/deletePost");
 
+const verifyToken = require('../middleware/verifyToken')
+
 const Router = require('../utils/router');
+const refreshtoken = require("../controller/userController/handleRefresh");
 
 function handleUserRoutes(req, res) {
 
   const route = new Router(req,res);
 
-  route.get(/^\/user\/(\w+)$/,handleGet)
-  route.get(/^\/user\/followers\/(\w+)$/,findFollowers)
-  route.get(/^\/user\/following\/(\w+)$/,findFollowing)
+  route.get(/^\/user\/followers\/(\w+)$/,verifyToken,findFollowers)
+  route.get(/^\/user\/following\/(\w+)$/,verifyToken,findFollowing)
+  route.get('/user/refresh',refreshtoken)
+  route.get(/^\/user\/(\w+)$/,verifyToken,handleGet)
 
   route.post(/^\/user\/search\/(\w+)$/,handleSearch)
   route.post('/user/register',handleRegister)
   route.post('/user/login',handleLogin)
   route.post('/user/logout',handleLogout)
 
-  route.update(/^\/user\/update\/(\w+)$/,handleUpdate)
+  route.update(/^\/user\/update\/(\w+)$/,verifyToken,handleUpdate)
   route.update(/^\/user\/follow\/(\w+)$/,handleFollow)
   route.update(/^\/user\/unfollow\/(\w+)$/,handleUnFollow)
 
-  route.delete(/^\/user\/delete\/(\w+)$/,handleDelete)
+  route.delete(/^\/user\/delete\/(\w+)$/,verifyToken,handleDelete)
 
 }
 

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./friends.scss";
 import useFetch from "../../cutomHook/useFetch";
+import { useUsercontext } from "../../context/userContext";
 const Friends = ({ userId }) => {
   const [user , setUser] = useState({});
+  const {currentUser} = useUsercontext();
   const {fetchdata} = useFetch();
   useEffect(() => {
     const url =  `/user/${userId}`;
-    fetchdata(url , setUser)
+    const option = {  headers: {
+      "Authorization": 'Bearer ' + currentUser.accesstoken,
+    },}
+    fetchdata(url ,option, setUser)
   }, []);
   return (
     <div>

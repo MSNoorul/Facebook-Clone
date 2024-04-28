@@ -14,7 +14,10 @@ function Followers() {
 
     useEffect(()=>{
         const url = "/user/followers/"+ currentUser._id;
-        fetchdata(url,setFollowers);
+        const option = {  headers: {
+            "Authorization": 'Bearer ' + currentUser.accesstoken,
+          },}
+        fetchdata(url,option,setFollowers);
     },[])
 
     return ( 

@@ -17,25 +17,37 @@ const EditProfile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = "/user/" + currentUser._id ;
-    fetchdata(url,setCurrentUser)
+    const url = "/user/" + currentUser._id;
+    const option = {  headers: {
+      "Authorization": 'Bearer ' + currentUser.accesstoken,
+    },}
+    const callback = (data) => {
+      setCurrentUser((pre) => ({
+        ...data,
+        accesstoken: pre.accesstoken,
+      }));
+    };
+    fetchdata(url,option, callback);
   }, []);
 
-
   const handleFileUpload = (e) => {
-
     e.preventDefault();
     const url = "/user/update/" + currentUser._id;
     const options = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        'Authorization' :'Bearer ' +currentUser.accesstoken
       },
       body: JSON.stringify(userData),
     };
-    const callback = (result) => {if (result.acknowledged){ navigate( "/profile/userId")}}
+    const callback = (result) => {
+      if (result.acknowledged) {
+        navigate("/profile/userId");
+      }
+    };
 
-    fetchdata(url,options,callback);
+    fetchdata(url, options, callback);
   };
 
   const convertImg = (img) => {
@@ -61,7 +73,6 @@ const EditProfile = () => {
       });
     });
   };
-  
 
   return (
     <div className="editProfile">
@@ -75,7 +86,7 @@ const EditProfile = () => {
                 <img
                   src={
                     userData.coverPicture ||
-                    currentUser.coverPicture.url ||
+                    currentUser.coverPicture?.url ||
                     "/assets/profilecover.jpg"
                   }
                   alt=""
@@ -95,7 +106,7 @@ const EditProfile = () => {
                 <img
                   src={
                     userData.profilePicture ||
-                    currentUser.profilePicture.url ||
+                    currentUser.profilePicture?.url ||
                     "/assets/DefaultProfile.jpg"
                   }
                   alt=""
@@ -126,7 +137,7 @@ const EditProfile = () => {
                 <img
                   src={
                     userData.profilePicture ||
-                    currentUser.profilePicture.url ||
+                    currentUser.profilePicture?.url ||
                     "/assets/DefaultProfile.jpg"
                   }
                   alt=""
@@ -219,14 +230,14 @@ const EditProfile = () => {
         </div>
       </div>
       {error && (
-          <Snackbar
+        <Snackbar
           open={!!error}
           autoHideDuration={3300} // Duration in milliseconds (adjust as needed)
-          onClose={()=> error}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Positioning at the top
+          onClose={() => error}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }} // Positioning at the top
         >
-           <Alert severity="error">{error}</Alert>
-         </Snackbar>
+          <Alert severity="error">{error}</Alert>
+        </Snackbar>
       )}
     </div>
   );

@@ -4,6 +4,7 @@ const ResponseJson = require("../../utils/handleResponse");
 
 async function refreshtoken(req,res){
     const cookieHeader = req.headers.cookie;
+    console.log(req.headers);
 
     // Parse the cookie header manually
     const cookies = {};
@@ -16,23 +17,22 @@ async function refreshtoken(req,res){
   
 
     try{
-        const founduser = await User.findOne({refreshtoken:cookies.nwt})
-        if(founduser){
+        const founduser = await User.findOne({refreshtoken:cookies.jwt})
 
+        if(founduser){
            const payload =  NWT.verifyToken(founduser.refreshtoken, process.env.REFRESH_TOKEN_SECRET)
-           const accesstoken = NWT.createToken({"username":username},process.env.ACCESS_TOKEN_SECRET,300);
+           const accesstoken = NWT.createToken({"username":payload.username},process.env.ACCESS_TOKEN_SECRET,1000 *10);
           
            res.setHeader("Content-Type", "application/json");
-
            res.statusCode = 200;
            res.end(JSON.stringify({ accesstoken}));
         }else{
             res.setHeader("Content-Type", "application/json");
-            res.statusCode = 401;
-            res.end(JSON.stringify({ message: "something error" }));
+            res.statusCode = 404;
+            res.end(JSON.stringify({ message: "Invalide User" }));
         }
     }catch(e){
-        ResponseJson(res,500,{message: e })
+        ResponseJson(res,500,{message: e.message})
     }
 }
 

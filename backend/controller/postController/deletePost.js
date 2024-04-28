@@ -5,7 +5,6 @@ const ResponseJson = require("../../utils/handleResponse");
 
 async function handleDelete(req, res, path) {
 
-
   const regex = /^\/post\/delete\/(\w+)$/;
   const Id = regex.exec(path)[1];
 
@@ -17,6 +16,8 @@ async function handleDelete(req, res, path) {
     let result ;
 
     const post = await Post.findById(Id);
+    const userid = post.userId.toString() // to convert the ObjectId to str
+    if(userid !== req.body.id) return ResponseJson(res,401,"You can't Delete")
 
     if(!post) return ResponseJson(res ,404 ,{message:"Post Not Found" })
 
