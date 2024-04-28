@@ -1,8 +1,10 @@
 # Facbook Clone
 
-This project is a simple clone of the popular social media platform Facebook, created as a learning exercise. It uses React.js for the frontend, Node.js for the backend, MongoDB as the database, and Cloudinary for image storage.
+Facebook Clone is a photo-sharing web application developed using the MERN stack. It uses React.js for the frontend, Node.js for the backend, MongoDB as the database, and Cloudinary for image storage.
 
 - To see the project [Live link](https://face-book-social.netlify.app).
+
+<img src='./Screenshot.png' alt = 'broken Image'/>
 
 ## How to Run
 
