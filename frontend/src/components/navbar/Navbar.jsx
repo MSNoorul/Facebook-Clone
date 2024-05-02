@@ -1,5 +1,6 @@
 import React, { useState, useEffect,useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from '@mui/icons-material/Close';
 import GroupsIcon from "@mui/icons-material/Groups";
 import GroupIcon from "@mui/icons-material/Group";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
@@ -89,7 +90,11 @@ const Navbar = () => {
       <div className="navbarLeft">
         <img src="/assets/Facebooklog.png" alt="" />
         <div className={` header_input ${searchBoxState ? "open" : ""}`}>
-          <SearchIcon onClick={handleSearchBox} />
+          <div onClick={handleSearchBox} >
+            {searchBoxState?
+           <CloseIcon /> :<SearchIcon />
+            }
+          </div>      
           <input
             className="search-input"
             placeholder="Search Facebook"

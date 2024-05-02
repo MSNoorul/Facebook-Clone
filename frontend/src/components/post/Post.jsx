@@ -63,6 +63,7 @@ const Post = ({ post, render }) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        'Authorization' :'Bearer ' +currentUser.accesstoken
       },
       body: JSON.stringify({ id: currentUser._id }),
     };
