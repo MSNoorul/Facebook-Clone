@@ -2,9 +2,9 @@ import React from "react";
 import "./menuLink.scss";
 
 
-const MenuLink = ({onClick ,Icon, text }) => {
+const MenuLink = ({onClick ,Icon, text,className }) => {
   return (
-    <div onClick={onClick} className="menuLink">
+    <div onClick={onClick} className={`menuLink ${className}`}>
       {Icon}
       <span className="menuLinkText">{text}</span>
     </div>

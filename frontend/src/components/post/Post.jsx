@@ -28,6 +28,7 @@ const Post = ({ post, render }) => {
       "Authorization": 'Bearer ' + currentUser.accesstoken,
     },}
     fetchdata(url, option ,setUser);
+    console.log(post?.likes?.includes(currentUser._id));
   }, []);
 
   const handleLikes = (name) => {
@@ -135,7 +136,7 @@ const Post = ({ post, render }) => {
         <hr className="footerHr" />
         <div className="postBottomFooter">
           <div
-            className="postBottomFooterItem"
+            className={`postBottomFooterItem  ${post?.likes?.includes(currentUser._id)?'liked':''}`}
             onClick={() => {
               handleLikes("like");
             }}
@@ -143,12 +144,12 @@ const Post = ({ post, render }) => {
             <ThumbUpAltOutlined className="footerIcon" />
             <span className="footerText">Like</span>
           </div>
-          <div className="postBottomFooterItem">
-            <ChatBubbleOutline className="footerIcon" />
+          <div className="postBottomFooterItem notAllowed">
+            <ChatBubbleOutline className="footerIcon notAllowed" />
             <span className="footerText">Comment</span>
           </div>
-          <div className="postBottomFooterItem">
-            <ShareOutlined className="footerIcon" />
+          <div className="postBottomFooterItem notAllowed">
+            <ShareOutlined className="footerIcon notAllowed" />
             <span className="footerText">Share</span>
           </div>
         </div>

@@ -96,7 +96,7 @@ const Share = ({ render }) => {
 
           <div className="shareBottom">
             <div className="shareOptions">
-              <div className="shareOption">
+              <div className="shareOption notAllowed">
                 <VideoCameraFront
                   className="shareIcon"
                   style={{ color: "#bb0000f2" }}
@@ -117,7 +117,7 @@ const Share = ({ render }) => {
                   onChange={handleFilecreat}
                 />
               </label>
-              <div className="shareOption">
+              <div className="shareOption notAllowed">
                 <EmojiEmotions
                   className="shareIcon"
                   style={{ color: "#bfc600ec" }}

@@ -44,15 +44,15 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebarWrapper">
         <MenuLink Icon={<RssFeedIcon />} text="Feed" />
-        <MenuLink Icon={<ChatIcon />} text="Chats" />
-        <MenuLink Icon={<VideocamIcon />} text="Videos" />
+        <MenuLink Icon={<ChatIcon />} text="Chats"  className={"notAllowed"}/>
+        <MenuLink Icon={<VideocamIcon />} text="Videos" className={"notAllowed"}/>
         <Link to={'/friends/followers'}>
         <MenuLink Icon={<GroupsIcon />} text="Followers" />
         </Link>
         <Link to ={'/friends/following'}>
         <MenuLink Icon={<GroupIcon />} text="Following" />
         </Link>
-        <MenuLink Icon={<EventIcon />} text="Events" />
+        <MenuLink Icon={<EventIcon />} text="Events" className={"notAllowed"}/>
         <span onClick={() => dispatch({ type: "TOGGLE" })}>
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
         </span>

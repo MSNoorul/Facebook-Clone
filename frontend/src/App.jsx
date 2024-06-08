@@ -8,6 +8,7 @@ import { DarkModeContext } from "./context/darkModeContext";
 import { useUsercontext } from "./context/userContext";
 import CircularIndeterminate from "./components/progress/circular";
 import '@mui/material/styles';
+import useFetch from "./cutomHook/useFetch";
 
 
 
@@ -20,11 +21,22 @@ const Following = lazy(()=> import('./pages/following/Following'));
 
 
 function App() {
-  const { currentUser } = useUsercontext();
+  const { currentUser,setCurrentUser } = useUsercontext();
   const { darkMode } = useContext(DarkModeContext);
+  const {loading ,error  ,fetchdata} = useFetch();
+
   useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({username:'Noorul Ameen',password:'test123'}),
+      }
+      const callback = (data)=>{
+        setCurrentUser(data);
+        window.confirm("Your loged in as Noorul Ameen is a default User")
+      }
+      fetchdata("/user/login" ,options,callback)
+  }, []);
 
 
   return (
@@ -36,7 +48,7 @@ function App() {
          
             <Route path="login" element={currentUser?<Navigate to ='/home'/>:<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="home" element={currentUser?<Home />:<Navigate to ='/login'/>} />
+            <Route path="home" element={<Home />} />
             <Route index element={currentUser?<Navigate to ='/home'/>:<Register />} />
             <Route path="profile">
               <Route path=":userId" element={currentUser?<Profile />:<Navigate to={'/login'}/>} />

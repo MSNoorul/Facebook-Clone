@@ -20,7 +20,9 @@
         background-color:#d2d2d282;
     }
 }
-
+.menuLink.notAllowed{
+cursor: not-allowed;
+}
 //Responsiveness
 
 @media only screen and (max-width: 992px){
