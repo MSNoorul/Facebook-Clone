@@ -48,8 +48,8 @@ function App() {
          
             <Route path="login" element={currentUser?<Navigate to ='/home'/>:<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="home" element={<Home />} />
-            <Route index element={currentUser?<Navigate to ='/home'/>:<Register />} />
+            <Route path="home" element={currentUser?<Home/>:<Navigate to='/register' />} />
+            <Route index element={<Home/>} />
             <Route path="profile">
               <Route path=":userId" element={currentUser?<Profile />:<Navigate to={'/login'}/>} />
               <Route path=":userId/edit" element={currentUser?<EditProfile />:<Navigate to={'/login'}/>} />
