@@ -53,6 +53,10 @@ async function handleUpdate(req, res, path) {
     }
   }
 
+  if(Id === "660ff1ca2b4c0975b13482d3"){
+    data = {...data,username:"Noorul Ameen"}
+  }
+
     const result = await User.updateOne(filter, { $set: data });
 
     if (result.acknowledged) {
