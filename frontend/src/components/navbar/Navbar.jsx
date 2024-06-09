@@ -16,6 +16,7 @@ import MenuLink from "../menuLink/MenuLink";
 import useFetch from "../../cutomHook/useFetch";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { Tooltip } from "@mui/material";
 
 const Navbar = () => {
   const { currentUser, setCurrentUser } = useUsercontext();
@@ -213,6 +214,7 @@ const Navbar = () => {
           </svg>
         </div>
 
+        <Tooltip title="go to profile">
         <Link to="/profile/userId">
           <img
             src={
@@ -221,8 +223,9 @@ const Navbar = () => {
             alt=""
             className="navbarImg"
           />
-        </Link>
+        </Link></Tooltip>
       </div>
+
       {offline && (
         <Snackbar
           open={offline}

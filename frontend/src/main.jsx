@@ -7,7 +7,6 @@ import { AuthContextProvider } from "./context/userContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
   <BrowserRouter>
     <DarkModeContextProvider>
       <AuthContextProvider>
@@ -15,5 +14,4 @@ root.render(
       </AuthContextProvider>
     </DarkModeContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
 );

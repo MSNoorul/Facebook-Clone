@@ -40,6 +40,13 @@ function App() {
       fetchdata("/user/login" ,options,callback)
   }, []);
 
+  if(loading){
+    window.alert("This is a free server that may take a few seconds to start. Please wait.")
+    return <div style={{height:'100vh'}}><CircularIndeterminate Iconsize={40}/></div>
+  } 
+  if(error) {
+    window.confirm(error+" Please try again later. Thank you for your interest in visiting my website.")
+  }
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
