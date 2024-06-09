@@ -59,7 +59,7 @@ const Sidebar = () => {
         <MenuLink
           onClick={handleLogout}
           Icon={<ExitToAppOutlinedIcon />}
-          text={`logout ( ${currentUser.username} )`}
+          text={`logout ( ${currentUser?.username} )`}
         />
 
         <hr className="sidebarHr" />
@@ -73,7 +73,7 @@ const Sidebar = () => {
         </h4>
 
         <ul className="sidebarFriendList">
-          {currentUser.followers?.map((u) => (
+          {currentUser?.followers?.map((u) => (
             <Friends key={u} userId={u} />
           ))}
         </ul>

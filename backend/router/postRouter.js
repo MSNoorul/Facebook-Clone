@@ -16,7 +16,7 @@ function handlePostRoutes(req, res) {
   const route = new Router(req,res);
 
  
-  route.get(/^\/post\/timeline\/(\w+)$/,verifyToken,getAllPost)
+  route.get(/^\/post\/timeline\/(\w+)$/,getAllPost)
   route.get(/^\/post\/(\w+)$/,getPost)
 
   route.post('post/create',createPost)

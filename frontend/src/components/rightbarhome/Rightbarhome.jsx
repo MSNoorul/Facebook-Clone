@@ -23,7 +23,7 @@ const Rightbarhome = () => {
       <span className="rightbarTitle">Following</span>
 
       <ul className="rightbarFriendList">
-        {currentUser.following?.map((u) => (
+        {currentUser?.following?.map((u) => (
           <Online key={u} userId={u} />
         ))}
       </ul>

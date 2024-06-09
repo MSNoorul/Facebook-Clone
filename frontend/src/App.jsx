@@ -25,6 +25,8 @@ function App() {
   const { darkMode } = useContext(DarkModeContext);
   const {loading ,error  ,fetchdata} = useFetch();
 
+  useEffect(()=>{console.log(currentUser);},[currentUser])
+
   useEffect(() => {
       const options = {
         method: "POST",
