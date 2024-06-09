@@ -28,7 +28,6 @@ const Post = ({ post, render }) => {
       "Authorization": 'Bearer ' + currentUser.accesstoken,
     },}
     fetchdata(url, option ,setUser);
-    console.log(post?.likes?.includes(currentUser._id));
   }, []);
 
   const handleLikes = (name) => {
