@@ -32,7 +32,7 @@ async function handleLogin(req, res) {
      
       await  User.updateOne({ username: username }, { $set: {refreshtoken : refreshtoken } });
 
-      res.setHeader('Set-Cookie', `jwt=${refreshtoken}; HttpOnly; Secure; SameSite=None; Max-Age=86400`);
+      res.setHeader('Set-Cookie', `jwt=${refreshtoken}; HttpOnly; Secure; SameSite=Strict; Max-Age=86400`);
 
       ResponseJson(res,200,{...finduser._doc,accesstoken,refreshtoken:""})
     } else {
